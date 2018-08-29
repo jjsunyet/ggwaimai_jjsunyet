@@ -26,3 +26,4 @@ export default {
     width 100%
     height 100%
 </style>
+<!--就是因为我远程建了一个readme和本地的冲突了，他没有办法自己解决冲突-->
