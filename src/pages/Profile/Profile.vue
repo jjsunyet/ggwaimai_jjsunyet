@@ -2,7 +2,7 @@
   <section class="profile">
     <HeaderTop title="我的"/>
     <router-link to="/login">
-      <section class="profile-number">
+      <section class="profile-number" @click="$router.replace">
         <a href="javascript:" class="profile-link">
           <div class="profile_image">
             <i class="iconfont icon-person"></i>
