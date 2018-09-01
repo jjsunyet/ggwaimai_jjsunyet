@@ -16,7 +16,8 @@ export default {
     this.$store.dispatch('getCategorys')
 //    分发给action发送ajax获取shops数据
     this.$store.dispatch('getShops')
-
+//  分发给action发送ajax获取user数据
+    this.$store.dispatch('getUser')
   },
 
   name: 'App',

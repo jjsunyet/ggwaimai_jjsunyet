@@ -62,3 +62,6 @@ shops的数据格式：
             icon_name:"票"
             id:4
             name:"开发票"
+mock数据接口
+1.第一步下载mockjs：已下载完成
+2.

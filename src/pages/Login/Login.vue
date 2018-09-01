@@ -57,7 +57,7 @@
         </form>
         <a href="javascript:;" class="about_us">关于我们</a>
       </div>
-      <a href="javascript:" class="go_back">
+      <a href="javascript:" class="go_back" @click = '$router.back()'>
         <i class="iconfont icon-jiantou2"></i>
       </a>
     </div>
@@ -66,8 +66,13 @@
 <script>
   import {reqSendCode,reqPwdLogin, reqMsgLogin} from '../../api'
   import {Toast,MessageBox} from 'mint-ui'
+<<<<<<< HEAD
 //  使用此方法必须修改配置，在babelrc中声明插件，因为webpack不能识别
+=======
+
+>>>>>>> e84e946bf9c5c66cb848a7c6000f8b37bc18f0cc
   export default {
+
     data() {
       return {
         loginWay: true,
@@ -141,7 +146,12 @@
             return
           }
 //          发请求，密码方式登录
+<<<<<<< HEAD
           result = await reqPwdLogin(name,pwd,captcha);
+=======
+//          注意传参数的数据格式
+          result = await reqPwdLogin({name,pwd,captcha});
+>>>>>>> e84e946bf9c5c66cb848a7c6000f8b37bc18f0cc
 //          只要发送请求就要更新验证码
           this.updateCaptcha();
         }
@@ -165,11 +175,20 @@
         if(result.code === 0){//成功
           const user = result.data;
 //          保存user
+<<<<<<< HEAD
           this.$store.dispatch('saveUser',user);
 //          自动跳转到个人中心
           this.$router.replace('/profile');
         }else{
           MessageBox.alert(result.msg)
+=======
+          this.$store.dispatch('saveUser',user)
+//          自动跳转到个人中心
+          this.$router.replace('/profile');
+        }else{
+          console.log(this.$router);
+          MessageBox.alert(result.msg);
+>>>>>>> e84e946bf9c5c66cb848a7c6000f8b37bc18f0cc
         }
       }
     }

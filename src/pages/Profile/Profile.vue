@@ -1,19 +1,20 @@
 <template>
   <section class="profile">
     <HeaderTop title="我的"/>
-    <router-link to="/login">
-      <section class="profile-number" @click="$router.replace">
+    <router-link :to="user._id ? '/userinfo' : '/login'">
+      <section class="profile-number">
         <a href="javascript:" class="profile-link">
           <div class="profile_image">
             <i class="iconfont icon-person"></i>
           </div>
           <div class="user-info">
-            <p class="user-info-top">登录/注册</p>
+            <!--登录/注册-->
+            <p class="user-info-top" v-if="!user.phone" >{{user.name? user.name : '登录/注册'}}</p>
             <p>
               <span class="user-icon">
                  <i class="iconfont icon-shouji icon-mobile"></i>
               </span>
-              <span class="icon-mobile-number">暂无绑定手机号</span>
+              <span class="icon-mobile-number">{{user.phone ? user.phone : '暂无绑定手机号'}}</span>
             </p>
           </div>
           <span class="arrow">
@@ -21,6 +22,7 @@
               </span>
         </a>
       </section>
+    </router-link>
       <section class="profile_info_data border-1px">
         <ul class="info_data_list">
           <a href="javascript:" class="info_data_link">
@@ -89,13 +91,43 @@
           </div>
         </a>
       </section>
-    </router-link>>
+      <section class="profile_my_order border-1px" v-show="user._id">
+        <mt-button type="danger" @click="logout" style="width: 100%">退出登录</mt-button>
+      </section>
+
   </section>
 </template>
 <script>
+  import {mapState} from 'vuex';
+  import {MessageBox,Toast} from 'mint-ui'
+  /*
+  * profile 需要完成的功能：
+  * 1.显示已登录页面：根据以下功能需求，则需要数据user
+  *   1.如果是密码登录则显示用户名
+  *   2.如果是验证码登录则显示手机号
+  * 2.完成退出登录功能
+  *   跳转到主页
+  *   显示退出登录的按钮
+  *
+  * */
+
   export default {
-    data() {
-      return {}
+//mapState()不要丢括号，丢括号是傻缺
+    computed:{
+      ...mapState(['user'])
+    },
+    methods:{
+      logout(){
+        MessageBox.confirm('确定要退出登录吗？')
+          .then(
+            action=>{
+              this.$store.dispatch('logout')
+            },
+            action=>{
+              Toast('已取消')
+            }
+          )
+      }
     }
   }
 </script>
