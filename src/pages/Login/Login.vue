@@ -57,7 +57,7 @@
         </form>
         <a href="javascript:;" class="about_us">关于我们</a>
       </div>
-      <a href="javascript:" class="go_back">
+      <a href="javascript:" class="go_back" @click = '$router.back()'>
         <i class="iconfont icon-jiantou2"></i>
       </a>
     </div>
@@ -66,7 +66,9 @@
 <script>
   import {reqSendCode,reqPwdLogin, reqMsgLogin} from '../../api'
   import {Toast,MessageBox} from 'mint-ui'
+
   export default {
+
     data() {
       return {
         loginWay: true,
@@ -140,7 +142,8 @@
             return
           }
 //          发请求，密码方式登录
-          result = await reqPwdLogin(name,pwd,captcha);
+//          注意传参数的数据格式
+          result = await reqPwdLogin({name,pwd,captcha});
 //          只要发送请求就要更新验证码
           this.updateCaptcha();
         }
@@ -164,11 +167,12 @@
         if(result.code === 0){//成功
           const user = result.data;
 //          保存user
-          this.$store.dispatch('saveUser',user);
+          this.$store.dispatch('saveUser',user)
 //          自动跳转到个人中心
           this.$router.replace('/profile');
         }else{
-          MessageBox.alert(result.msg)
+          console.log(this.$router);
+          MessageBox.alert(result.msg);
         }
       }
     }

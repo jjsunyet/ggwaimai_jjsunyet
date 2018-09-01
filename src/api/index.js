@@ -14,10 +14,18 @@ export const reqShops =(longitude,latitude)=>ajax(BASE + '/shops',{latitude,long
 // 4.根据经纬度和关键字搜索商铺列表
 export const searchShops =(geohash,keyword)=>ajax(BASE + '/search_shops',{geohash,keyword})
 // 5.获取手机验证码
-export const reqSendCode = (phone)=>ajax(BASE+'/api/sendcode',{phone});
+export const reqSendCode = (phone)=>ajax(BASE+'/sendcode',{phone});
 //6.手机短信验证登录
-export const reqMsgLogin = (phone,code)=>ajax(BASE + '/api/login_sms',{phone,code},'POST')
+export const reqMsgLogin = (phone,code)=>ajax(BASE + '/login_sms',{phone,code},'POST')
 //7.账号密码登录
-export const reqPwdLogin =({name,pwd,captcha})=>ajax(BASE+'/api/login_pwd',{name,pwd,captcha},'POST');
+export const reqPwdLogin =({name,pwd,captcha})=>ajax(BASE+'/login_pwd',{name,pwd,captcha},'POST');
 //8.获取用户信息
-export const reqUser = ()=>ajax(BASE+'api/userInfo');
+export const reqUser = ()=>ajax(BASE+'/userinfo');
+//9异步登出
+export const reqLogout =()=>ajax(BASE+'/logout');
+//请求商店商品分类列表信息
+export const reqShopGoods = ()=>ajax('/goods');
+//请求店铺评论信息
+export const reqShopRatings = ()=>ajax('/ratings');
+//请求店铺详情信息
+export const reqShopInfo = ()=>ajax('/info')
