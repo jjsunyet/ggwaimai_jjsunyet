@@ -2,10 +2,16 @@ import {
   RECEIVE_ADDRESS,
   RECEIVE_CATEGORYS,
   RECEIVE_SHOPS,
-  // RECEIVE_SEARCH_SHOPS
+  RECEIVE_USER
 } from './mutation-types'
 
-import {reqAddress,reqCategorys,reqShops} from '../api'
+import {
+  reqAddress,
+  reqCategorys,
+  reqShops,
+  reqUser
+} from '../api'
+
 
 export default {
   async getAddress({commit,state}){
@@ -30,5 +36,20 @@ export default {
     const result = await reqShops(longitude,latitude);
     const shops = result.data;
     commit(RECEIVE_SHOPS,{shops});
-  }
+  },
+//  异步获得用户信息
+  async getUser({commit}){
+    const result = await reqUser();
+    //如果请求到了数据，则先获得user数据，然后再提交user
+    if(result.code===0){
+      const user = result.data;
+      commit(RECEIVE_USER,{user})
+
+    }
+  },
+//  保存user的同步action
+  async saveUser({commit},user){
+    commit(RECEIVE_USER,{user})
+  },
+
 }
